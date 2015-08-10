@@ -1,0 +1,60 @@
+public class Announcer extends JavaPlugin {
+	
+    FileConfiguration config;
+    File cfile;
+	
+	public void onEnable() {
+		config = getConfig();
+		config.options().copyDefaults(true);
+		saveConfig();
+		cfile = new File(getDataFolder(), "config.yml");
+		
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			public void run() {
+				Bukkit.getServer().broadcastMessage(ChatColor.GREEN + config.getString("announcement"));
+				
+			}
+			
+			
+			
+		}, 20, 100);
+		
+	}
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String Label, String[] args) {
+		if(cmd.getName().equalsIgnoreCase("annreload")) {
+			config = YamlConfiguration.loadConfiguration(cfile);
+			sender.sendMessage(ChatColor.GREEN + "Reloaded Announcer Config!");
+			
+		}
+		return true;
+			
+		
+	}
+
+}
+
+
+
+
+
+
+
+Config.yml:
+announcement: This is an Announcement!
+
+
+
+
+
+Plugin.yml:
+
+name: Announcer
+version: 1.0
+main: me.runningtacoshd.announcer.Announcer
+description: Announces an Announcement
+
+commands:
+    annreload:
+        usage: /<command>
+        description: reload 

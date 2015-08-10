@@ -1,0 +1,46 @@
+public class SimpleCommand extends JavaPlugin{
+	
+	public void onEnable(){
+		
+	}
+	
+	public void onDisable(){
+		
+		
+	}
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String Label, String[] args) {
+		
+		if(!(sender instanceof Player)) {
+			sender.sendMessage(ChatColor.GREEN + "The Console has ran the Command");
+			return true;
+		}
+		
+		
+		
+		if(cmd.getName().equalsIgnoreCase("Potato")) {
+			sender.sendMessage(ChatColor.GOLD + "You Have Said the Command Potato");
+			
+		}
+		return true;
+		
+		
+		
+	}
+	
+
+}
+
+
+plugin.yml:
+
+name: SimpleCommand
+version: 1.0
+main: me.runningtacoshd.simplecommand.SimpleCommand
+author: me
+description: A Simple Command
+
+commands:
+    Potato:
+         usage: </command>
+         description: Potato Command

@@ -1,0 +1,62 @@
+public class Cooldown extends JavaPlugin implements Listener {
+	
+	ArrayList<String> cooldown = new ArrayList<String>();
+	
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String Label, String[] args) {
+		if(!(sender instanceof Player)) {
+			sender.sendMessage(ChatColor.RED + "Only Player can use this command");
+			return true;
+			
+		}
+		
+		    Player p = (Player) sender;
+			PlayerInventory pi = p.getInventory();
+			
+			if(cooldown.contains(p)){
+				p.sendMessage(ChatColor.RED + "You can not get your kit until 10 seconds");
+				
+			
+		
+			if (cmd.getName().equalsIgnoreCase("kit")) { 
+		    pi.addItem(new ItemStack(Material.GOLDEN_APPLE, 64));
+		    pi.addItem(new ItemStack(Material.COOKED_BEEF ));
+		    pi.addItem(new ItemStack(Material.DIAMOND_SWORD, 1));
+		    p.sendMessage(ChatColor.GREEN + "You have recieved your kit");
+		    cooldown.add(p);
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+				public void run() {
+					cooldown.remove(p);
+					
+				}
+				
+			}, 100);
+			
+		}
+			if(cmd.getName().equalsIgnoreCase("ci")){
+				pi.clear();
+				p.sendMessage(ChatColor.GREEN + "You have cleared your inventory");
+				
+			}
+			
+		return true;
+		
+	}
+	}
+}
+
+
+
+
+plugin.yml:
+
+name: Cooldown
+version: 1.0
+main: me.runningtacoshd.cooldown.Cooldown
+author: me
+description: A very simple kit plugin.
+ 
+commands:
+    freeze:
+        usage: /<command>
+        description: Freeze or Unfreeze players.

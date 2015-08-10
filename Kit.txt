@@ -1,0 +1,51 @@
+public class Kit extends JavaPlugin{
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String Label, String[] args) {
+		if(!(sender instanceof Player)) {
+			sender.sendMessage(ChatColor.RED + "Only Player can use this command");
+			return true;
+			
+		}
+		
+		    Player p = (Player) sender;
+			PlayerInventory pi = p.getInventory();
+		
+			if (cmd.getName().equalsIgnoreCase("kit")) { 
+		    pi.addItem(new ItemStack(Material.GOLDEN_APPLE, 64));
+		    pi.addItem(new ItemStack(Material.COOKED_BEEF ));
+		    pi.addItem(new ItemStack(Material.DIAMOND_SWORD, 1));
+		    p.sendMessage(ChatColor.GREEN + "You have recieved your kit");
+		    
+			
+		}
+			if(cmd.getName().equalsIgnoreCase("ci")){
+				pi.clear();
+				p.sendMessage(ChatColor.GREEN + "You have cleared your inventory");
+				
+			}
+			
+		return true;
+		
+	}
+
+}
+
+
+
+plugin.yml
+
+name: Kit
+version: 1.0
+main: me.runningtacoshd.kit.Kit
+author: me
+description: A very simple kit plugin.
+ 
+commands:
+    kit:
+        usage: /<command>
+        aliases: [getkit]
+        description: Get a kit.
+    ci:
+        usage: /<command>
+        aliases: [clearinventory, clearinv]
+        description: Empty your inventory.

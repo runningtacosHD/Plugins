@@ -1,0 +1,37 @@
+public class ChangeName extends JavaPlugin{
+	
+	public void onEnable() {
+		Bukkit.getServer().getLogger().info("ChangeName v" + this.getDescription().getVersion() + " has been enabled!");
+		
+	}
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String Label, String[] args) {
+		Player p = (Player) sender;
+		if(cmd.getName().equalsIgnoreCase("setname"));
+		p.setDisplayName(args[0]);
+		p.sendMessage(ChatColor.GREEN + "You have set your name!");
+		
+		if(args.length == 0);
+			p.sendMessage(ChatColor.RED + "Please specify a player!");
+		return true;
+		
+	}
+
+}
+
+
+
+
+Plugin.yml:
+
+name: ChangeName
+version: 1.0
+main: me.runningtacohd.changename.ChangeName
+author: me
+description: Change your name!
+
+commands:
+    setname:
+         usage: </command>
+         description: Set Your Name!
+

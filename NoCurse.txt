@@ -1,0 +1,40 @@
+public class NoCurse extends JavaPlugin implements Listener{
+	
+	@EventHandler
+	public void onPlayerChat(PlayerChatEvent e) {
+		for (String word : e.getMessage().split(" ")) {
+			if (getConfig().getStringList("words").contains(word)) {
+				e.setCancelled(true);
+				e.getPlayer().sendMessage(ChatColor.RED + "Don't Curse!");
+				
+			}
+			
+		}
+		
+	}
+	
+	public void onEnable() {
+		getConfig().options().copyDefaults(true);
+		saveConfig();
+		Bukkit.getServer().getPluginManager().registerEvents(this, this);
+		
+	}
+
+}
+
+
+plugin.yml:
+
+name: NoCurse
+version: 1.0
+main: me.runningtacoshd.nocurse.NoCurse
+description: Stops Cursing from happening.
+
+
+
+config.yml
+
+words:
+  - hi
+  - hello
+  - pizza
